@@ -1,0 +1,28 @@
+2024-11-21 00:22:37 [main] WARN  detailed-ops - 🚀 Operation Starting
+Method: testMethod
+User: anonymous
+IP: 127.0.0.1
+Headers: {}
+Memory: 38 MB
+Environment: default
+CorrelationId: ca4f63c7-a18e-491a-9eb0-d9fc46aa0e39
+Parameters: []
+2024-11-21 00:22:37 [main] WARN  detailed-ops - ✅ Operation Completed
+Method: testMethod
+Duration: 14 ms ✅ Normal duration
+Result: "Test successful!"
+CorrelationId: ca4f63c7-a18e-491a-9eb0-d9fc46aa0e39
+2024-11-21 00:25:36 [main] WARN  detailed-ops - 🚀 Operation Starting
+Method: testMethod
+User: anonymous
+IP: 127.0.0.1
+Headers: {}
+Memory: 38 MB
+Environment: default
+CorrelationId: ff3ab07c-20bc-4cdc-b63a-13b64e6e3f92
+Parameters: []
+2024-11-21 00:25:36 [main] WARN  detailed-ops - ✅ Operation Completed
+Method: testMethod
+Duration: 20 ms ✅ Normal duration
+Result: "Test successful!"
+CorrelationId: ff3ab07c-20bc-4cdc-b63a-13b64e6e3f92
