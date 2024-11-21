@@ -1,4 +1,4 @@
-package io.github.dynamicce.spring_detailed_logger.annotation;
+package io.github.spring.logger.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -8,4 +8,4 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface LogDetails {
-}
+} 
