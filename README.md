@@ -21,11 +21,13 @@ A simple and powerful library that provides detailed method logging capabilities
 
 Add the Maven dependency:
 
+```xml
 <dependency>
     <groupId>io.github.dynamicce</groupId>
     <artifactId>spring-detailed-logger</artifactId>
     <version>1.0.0</version>
 </dependency>
+
 
 ## 🔧 Usage
 
