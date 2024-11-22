@@ -1,4 +1,4 @@
-package io.github.spring.logger.config;
+package io.github.dynamicce.logger.config;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,7 @@ import org.springframework.core.env.Environment;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.github.spring.logger.aspect.DetailedLogAspect;
+import io.github.dynamicce.logger.aspect.DetailedLogAspect;
 
 @Configuration
 @EnableAspectJAutoProxy

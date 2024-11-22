@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-io.github.spring.logger.config.DetailedLoggerAutoConfiguration 
+io.github.dynamicce.logger.config.DetailedLoggerAutoConfiguration 
