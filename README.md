@@ -25,7 +25,7 @@ Add the Maven dependency:
 <dependency>
     <groupId>io.github.dynamicce</groupId>
     <artifactId>spring-detailed-logger</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.4</version>
 </dependency>
 
 
