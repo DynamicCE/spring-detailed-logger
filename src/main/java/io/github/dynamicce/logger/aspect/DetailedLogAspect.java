@@ -28,7 +28,7 @@ import jakarta.servlet.http.HttpServletRequest;
 @Aspect
 @Component
 public class DetailedLogAspect {
-    private static final Logger logger = LoggerFactory.getLogger(DetailedLogAspect.class);
+    private static final Logger logger = LoggerFactory.getLogger("DETAILED_OPERATIONS");
     private static final String CORRELATION_ID = "correlationId";
     private static final long SLOW_EXECUTION_THRESHOLD = 1000L;
     private static final String ANONYMOUS_USER = "anonymous";
@@ -46,8 +46,7 @@ public class DetailedLogAspect {
     @Around("@annotation(io.github.dynamicce.logger.annotation.LogDetails)")
     public Object logMethodDetails(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        String methodName =
-                signature.getDeclaringType().getSimpleName() + "." + signature.getName();
+        String methodName = signature.getDeclaringType().getSimpleName() + "." + signature.getName();
         long startTime = System.currentTimeMillis();
         String correlationId = UUID.randomUUID().toString();
 
@@ -135,8 +134,8 @@ public class DetailedLogAspect {
 
     private HttpServletRequest getCurrentRequest() {
         try {
-            ServletRequestAttributes attributes =
-                    (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder
+                    .getRequestAttributes();
             return attributes != null ? attributes.getRequest() : null;
         } catch (Exception e) {
             logger.debug("Could not get current request", e);
@@ -145,10 +144,9 @@ public class DetailedLogAspect {
     }
 
     private String extractClientIP(HttpServletRequest request) {
-        String[] headerNames =
-                {"X-Forwarded-For", "Proxy-Client-IP", "WL-Proxy-Client-IP", "HTTP_X_FORWARDED_FOR",
-                        "HTTP_X_FORWARDED", "HTTP_X_CLUSTER_CLIENT_IP", "HTTP_CLIENT_IP",
-                        "HTTP_FORWARDED_FOR", "HTTP_FORWARDED", "HTTP_VIA", "REMOTE_ADDR"};
+        String[] headerNames = { "X-Forwarded-For", "Proxy-Client-IP", "WL-Proxy-Client-IP", "HTTP_X_FORWARDED_FOR",
+                "HTTP_X_FORWARDED", "HTTP_X_CLUSTER_CLIENT_IP", "HTTP_CLIENT_IP",
+                "HTTP_FORWARDED_FOR", "HTTP_FORWARDED", "HTTP_VIA", "REMOTE_ADDR" };
 
         for (String header : headerNames) {
             String ip = request.getHeader(header);
