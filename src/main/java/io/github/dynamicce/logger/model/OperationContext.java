@@ -1,7 +1,7 @@
-package io.github.spring.logger.model;
+package io.github.dynamicce.logger.model;
 
 import java.util.Map;
 
 public record OperationContext(String username, String clientIP, Map<String, String> headers,
-                long usedMemory, String activeProfile) {
+        long usedMemory, String activeProfile) {
 }

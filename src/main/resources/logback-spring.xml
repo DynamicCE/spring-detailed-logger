@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-
+    <!-- Console Appender -->
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
+    <!-- File Appender for Detailed Operations -->
     <appender name="DetailedOperationsFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>logs/detailed-operations.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -18,15 +19,14 @@
         </encoder>
     </appender>
 
-
-    <logger name="operation-logs" level="WARN" additivity="false">
+    <!-- Logger for our operations -->
+    <logger name="operation-logs" level="INFO" additivity="false">
         <appender-ref ref="DetailedOperationsFile"/>
         <appender-ref ref="Console"/>
     </logger>
 
-
+    <!-- Root logger -->
     <root level="INFO">
         <appender-ref ref="Console"/>
     </root>
-    
 </configuration> 

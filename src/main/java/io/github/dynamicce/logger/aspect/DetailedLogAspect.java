@@ -1,4 +1,4 @@
-package io.github.spring.logger.aspect;
+package io.github.dynamicce.logger.aspect;
 
 import java.util.Collections;
 import java.util.Enumeration;
@@ -13,20 +13,20 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.github.spring.logger.model.OperationContext;
+import io.github.dynamicce.logger.model.OperationContext;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.RequiredArgsConstructor;
 
 @Aspect
 @Component
-@RequiredArgsConstructor
 public class DetailedLogAspect {
     private static final Logger logger = LoggerFactory.getLogger(DetailedLogAspect.class);
     private static final String CORRELATION_ID = "correlationId";
@@ -37,7 +37,13 @@ public class DetailedLogAspect {
     private final ObjectMapper objectMapper;
     private final Environment environment;
 
-    @Around("@annotation(io.github.spring.logger.annotation.LogDetails)")
+    @Autowired
+    public DetailedLogAspect(ObjectMapper objectMapper, Environment environment) {
+        this.objectMapper = objectMapper;
+        this.environment = environment;
+    }
+
+    @Around("@annotation(io.github.dynamicce.logger.annotation.LogDetails)")
     public Object logMethodDetails(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         String methodName =
@@ -77,7 +83,7 @@ public class DetailedLogAspect {
                     Parameters: {}""", methodName, context.username(), context.clientIP(),
                     context.headers(), context.usedMemory(), context.activeProfile(), correlationId,
                     objectMapper.writeValueAsString(joinPoint.getArgs()));
-        } catch (Exception e) {
+        } catch (JsonProcessingException | IllegalArgumentException e) {
             logger.error("Error occurred while logging operation start", e);
         }
     }
@@ -96,7 +102,7 @@ public class DetailedLogAspect {
                     Result: {}
                     Correlation ID: {}""", methodName, duration, performanceWarning,
                     objectMapper.writeValueAsString(result), correlationId);
-        } catch (Exception e) {
+        } catch (JsonProcessingException | IllegalArgumentException e) {
             logger.error("Error occurred while logging operation end", e);
         }
     }
