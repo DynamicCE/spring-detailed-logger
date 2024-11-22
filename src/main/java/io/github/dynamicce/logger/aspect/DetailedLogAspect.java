@@ -29,7 +29,7 @@ import jakarta.servlet.http.HttpServletRequest;
 @Aspect
 @Component
 public class DetailedLogAspect {
-    private static final Logger logger = LoggerFactory.getLogger("DETAILED_OPERATIONS");
+    private static final Logger logger = LoggerFactory.getLogger("operation-logs");
     private static final String CORRELATION_ID = "correlationId";
     private static final long SLOW_EXECUTION_THRESHOLD = 1000L;
     private static final String ANONYMOUS_USER = "anonymous";
@@ -46,6 +46,7 @@ public class DetailedLogAspect {
 
     @Around("@annotation(io.github.dynamicce.logger.annotation.LogDetails)")
     public Object logMethodDetails(ProceedingJoinPoint joinPoint) throws Throwable {
+        logger.debug("Aspect triggered for method: {}", joinPoint.getSignature().getName());
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         String methodName =
                 signature.getDeclaringType().getSimpleName() + "." + signature.getName();
