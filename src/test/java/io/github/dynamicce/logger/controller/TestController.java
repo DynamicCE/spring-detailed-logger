@@ -15,4 +15,5 @@ public class TestController {
     public String testMethod() {
         return "Test method called";
     }
+
 }
